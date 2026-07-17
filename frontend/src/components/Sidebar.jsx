@@ -2,7 +2,7 @@ import { MODULES, CATEGORIES } from '../data/modules'
 import { hasPermission } from '../services/auth'
 import { isModuleEnabled } from '../services/storage'
 
-export default function Sidebar({ user, activeModule, onModuleChange, onLogout }) {
+export default function Sidebar({ user, activeModule, onModuleChange, onLogout, mobile = false, open = false }) {
   // A module shows only if the user has permission AND admin hasn't disabled it.
   const visible = MODULES.filter(
     (m) => hasPermission(user, m.id) && isModuleEnabled(m.id)
@@ -18,10 +18,18 @@ export default function Sidebar({ user, activeModule, onModuleChange, onLogout }
   return (
     <nav
       style={{
-        position: 'sticky',
+        // Desktop: a sticky column inside the grid.
+        // Mobile: a fixed 260px drawer that slides in over the content.
+        position: mobile ? 'fixed' : 'sticky',
         top: 0,
+        left: 0,
+        width: mobile ? 260 : 'auto',
         height: '100vh',
+        zIndex: mobile ? 200 : 'auto',
+        transform: mobile ? `translateX(${open ? '0' : '-100%'})` : 'none',
+        transition: 'transform 0.25s ease',
         background: 'rgba(4,3,8,0.94)',
+        backdropFilter: mobile ? 'blur(20px)' : 'none',
         borderRight: '1px solid var(--gold-alpha)',
         display: 'flex',
         flexDirection: 'column',

@@ -433,7 +433,7 @@ function SongResult({ song, form, onReset, flash }) {
       </div>
 
       {/* Media placeholders */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 14, marginBottom: 14 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))', gap: 14, marginBottom: 14 }}>
         <div className="card">
           <div className="card-body">
             <div style={{ fontSize: 11, color: 'var(--w3)', marginBottom: 10 }}>🔊 Audio — connects in Phase 2 (SUNO AI)</div>

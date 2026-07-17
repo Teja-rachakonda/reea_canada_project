@@ -78,7 +78,7 @@ export default function Dashboard({ user }) {
       </div>
 
       {/* Two column */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16, marginBottom: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 16, marginBottom: 20 }}>
         <div className="card fade-up-1">
           <div className="card-header">
             <div>

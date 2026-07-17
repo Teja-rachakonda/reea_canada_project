@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { initAuth, getSession, logout, hasPermission } from './services/auth'
 import { isModuleEnabled } from './services/storage'
 import { MODULES } from './data/modules'
+import { useIsMobile } from './hooks/useMediaQuery'
 
 import LoginScreen from './components/LoginScreen'
 import Sidebar from './components/Sidebar'
@@ -32,6 +33,8 @@ function firstAllowedModule(user) {
 export default function App() {
   const [user, setUser] = useState(null)
   const [activeModule, setActiveModule] = useState(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     initAuth()
@@ -42,6 +45,11 @@ export default function App() {
     }
   }, [])
 
+  // Leaving mobile width should never leave a stale drawer open on desktop.
+  useEffect(() => {
+    if (!isMobile) setDrawerOpen(false)
+  }, [isMobile])
+
   function handleLogin(u) {
     setUser(u)
     setActiveModule(firstAllowedModule(u))
@@ -51,6 +59,13 @@ export default function App() {
     logout()
     setUser(null)
     setActiveModule(null)
+    setDrawerOpen(false)
+  }
+
+  // On mobile, picking a module closes the drawer so the content is visible.
+  function selectModule(id) {
+    setActiveModule(id)
+    setDrawerOpen(false)
   }
 
   if (!user) return <LoginScreen onLogin={handleLogin} />
@@ -82,7 +97,7 @@ export default function App() {
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: '260px 1fr',
+        gridTemplateColumns: isMobile ? '1fr' : '260px 1fr',
         minHeight: '100vh',
         position: 'relative',
         zIndex: 1,
@@ -91,16 +106,49 @@ export default function App() {
       <Sidebar
         user={user}
         activeModule={safeModule}
-        onModuleChange={setActiveModule}
+        onModuleChange={selectModule}
         onLogout={handleLogout}
+        mobile={isMobile}
+        open={drawerOpen}
       />
 
-      <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0, height: '100vh' }}>
+      {/* Backdrop — tap outside the drawer to close it (mobile only). */}
+      {isMobile && drawerOpen && (
+        <div
+          onClick={() => setDrawerOpen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.55)',
+            zIndex: 190,
+          }}
+        />
+      )}
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          minWidth: 0,
+          height: '100vh',
+          // On desktop the sidebar occupies grid column 1; on mobile it's an
+          // overlay, so the content column must start at column 1 itself.
+          gridColumn: isMobile ? '1 / -1' : 'auto',
+        }}
+      >
         <Topbar
           activeModule={activeModuleData}
-          onNewClick={() => hasPermission(user, 'reaamusic') && setActiveModule('reaamusic')}
+          onNewClick={() => hasPermission(user, 'reaamusic') && selectModule('reaamusic')}
+          isMobile={isMobile}
+          onMenuClick={() => setDrawerOpen(true)}
         />
-        <div style={{ flex: 1, overflowY: 'auto', padding: '24px 28px 40px' }}>
+        <div
+          style={{
+            flex: 1,
+            overflowY: 'auto',
+            padding: isMobile ? '16px 14px 32px' : '24px 28px 40px',
+          }}
+        >
           <ModuleComponent key={safeModule} user={user} module={activeModuleData} />
         </div>
       </div>
