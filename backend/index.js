@@ -7,6 +7,7 @@ require('dotenv').config({ override: true })
 
 const openai = require('./services/openaiService')
 const supabase = require('./services/supabaseService')
+const places = require('./services/placesService')
 
 const app = express()
 
@@ -15,6 +16,7 @@ app.use(express.json())
 
 app.use('/api/reaamusic', require('./routes/reaamusic'))
 app.use('/api/leads', require('./routes/leads'))
+app.use('/api/businesses', require('./routes/businesses'))
 
 app.get('/health', (_req, res) => {
   res.json({
@@ -23,6 +25,7 @@ app.get('/health', (_req, res) => {
     model: openai.MODEL,
     openaiConfigured: openai.isConfigured(),
     supabaseConfigured: supabase.isConfigured(),
+    placesConfigured: places.isConfigured(),
   })
 })
 
@@ -40,5 +43,6 @@ const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`\n  🍁 REAA backend running on http://localhost:${PORT}`)
   console.log(`     OpenAI   ${openai.isConfigured() ? '✅ configured' : '⚠️  no OPENAI_API_KEY in backend/.env'}`)
-  console.log(`     Supabase ${supabase.isConfigured() ? '✅ configured' : '⚠️  not configured (songs saved to browser only)'}\n`)
+  console.log(`     Supabase ${supabase.isConfigured() ? '✅ configured' : '⚠️  not configured (songs saved to browser only)'}`)
+  console.log(`     Places   ${places.isConfigured() ? '✅ configured' : '⚠️  no GOOGLE_PLACES_KEY (Find Businesses disabled)'}\n`)
 })

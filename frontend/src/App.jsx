@@ -12,12 +12,14 @@ import Placeholder from './components/Placeholder'
 import Dashboard from './modules/Dashboard'
 import AdminPanel from './modules/AdminPanel'
 import REAAMusic from './modules/REAAMusic'
+import BusinessFinder from './modules/BusinessFinder'
 
 // Built modules. Everything else falls through to Placeholder.
 const MODULE_COMPONENTS = {
   dashboard: Dashboard,
   admin: AdminPanel,
   reaamusic: REAAMusic,
+  scraper: BusinessFinder,
 }
 
 /**

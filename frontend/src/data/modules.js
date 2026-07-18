@@ -2,7 +2,8 @@ export const MODULES = [
   { id: 'dashboard', label: 'Dashboard', icon: '🍁', category: 'Core', version: '1.0.0', permissions: ['*'], badge: 'LIVE', badgeType: 'green' },
   { id: 'leads', label: 'Lead Pipeline', icon: '🎯', category: 'CRM', version: '0.1.0', permissions: ['leads'], badge: '47', badgeType: 'red' },
   { id: 'whatsapp', label: 'WhatsApp Engine', icon: '💬', category: 'CRM', version: '0.1.0', permissions: ['whatsapp'], badge: '8.5K', badgeType: 'green' },
-  { id: 'scraper', label: 'GTA Scraper', icon: '🔍', category: 'Data', version: '0.1.0', permissions: ['scraper'] },
+  { id: 'scraper', label: 'Find Businesses', icon: '🔎', category: 'Data', version: '1.0.0', permissions: ['scraper'], badge: 'NEW', badgeType: 'green' },
+  { id: 'precon', label: 'Pre-Construction', icon: '🏗️', category: 'Data', version: '0.1.0', permissions: ['precon'] },
   { id: 'trreb', label: 'TRREB Intel', icon: '📊', category: 'Data', version: '0.1.0', permissions: ['trreb'] },
   { id: 'cma', label: 'Smart CMA', icon: '📋', category: 'Tools', version: '0.1.0', permissions: ['cma'] },
   { id: 'houzgpt', label: 'HouzGPT Canada', icon: '🏘️', category: 'Tools', version: '0.1.0', permissions: ['houzgpt'] },
@@ -24,8 +25,8 @@ export const CATEGORIES = ['Core', 'CRM', 'Data', 'Tools', 'Content', 'AI', 'Ads
 export const ALL_PERMISSIONS = [
   'leads', 'cma', 'social', 'whatsapp', 'calendar',
   'video', 'posters', 'buyer', 'listing', 'scraper',
-  'voicebot', 'ads', 'houzgpt', 'trreb', 'reaamusic',
-  'dashboard', 'admin',
+  'precon', 'voicebot', 'ads', 'houzgpt', 'trreb',
+  'reaamusic', 'dashboard', 'admin',
 ]
 
 export function getModule(id) {
