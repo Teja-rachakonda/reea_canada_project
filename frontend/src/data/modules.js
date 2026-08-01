@@ -9,6 +9,7 @@ export const MODULES = [
   { id: 'houzgpt', label: 'HouzGPT Canada', icon: '🏘️', category: 'Tools', version: '1.0.0', permissions: ['houzgpt'], badge: 'NEW', badgeType: 'green' },
   { id: 'buyer', label: 'Buyer Agent AI', icon: '🏷️', category: 'Tools', version: '0.1.0', permissions: ['buyer'] },
   { id: 'listing', label: 'Listing Agent AI', icon: '🏡', category: 'Tools', version: '0.1.0', permissions: ['listing'] },
+  { id: 'deals', label: 'Deals Alert', icon: '🔥', category: 'Content', version: '1.0.0', permissions: ['social'], badge: 'NEW', badgeType: 'green' },
   { id: 'social', label: 'Social Engine', icon: '📱', category: 'Content', version: '0.1.0', permissions: ['social'] },
   { id: 'calendar', label: 'Content Calendar', icon: '📅', category: 'Content', version: '0.1.0', permissions: ['social'] },
   { id: 'video', label: 'Video Studio', icon: '🎬', category: 'Content', version: '0.1.0', permissions: ['social'] },
