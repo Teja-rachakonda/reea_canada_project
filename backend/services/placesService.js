@@ -35,10 +35,11 @@ function isConfigured() {
 }
 
 /**
- * Search businesses by free-text type + location.
+ * Search businesses by type + location (+ optional cuisine).
+ * Same input shape as osmService.findBusinesses so the route can swap providers.
  * @returns {Promise<Array>} normalized business rows
  */
-async function findBusinesses({ query, regionCode = 'CA', maxResults = 20 }) {
+async function findBusinesses({ type, location, cuisine, regionCode = 'CA', maxResults = 20 }) {
   const key = getKey()
   if (!key) {
     const err = new Error(
@@ -47,6 +48,9 @@ async function findBusinesses({ query, regionCode = 'CA', maxResults = 20 }) {
     err.status = 503
     throw err
   }
+
+  // e.g. "Indian Restaurants in Mississauga" — location text drives the region.
+  const query = [cuisine, type, 'in', location].filter(Boolean).join(' ')
 
   let resp
   try {
@@ -147,9 +151,9 @@ async function findEmailForWebsite(website) {
   return ''
 }
 
-/** Enrich a batch of rows with emails, capped so a search can't run forever. */
+/** Enrich rows that have a website but no email yet, capped so a search can't run forever. */
 async function enrichEmails(rows, cap = 12) {
-  const targets = rows.filter((r) => r.website).slice(0, cap)
+  const targets = rows.filter((r) => r.website && !r.email).slice(0, cap)
   await Promise.all(
     targets.map(async (r) => {
       r.email = await findEmailForWebsite(r.website)

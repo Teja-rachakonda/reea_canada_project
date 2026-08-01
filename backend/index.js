@@ -9,6 +9,13 @@ const openai = require('./services/openaiService')
 const supabase = require('./services/supabaseService')
 const places = require('./services/placesService')
 
+// Which source Find Businesses uses. OSM = free/no-key; Google = needs billing key.
+function businessProvider() {
+  const choice = (process.env.BUSINESS_PROVIDER || '').toLowerCase()
+  if (choice === 'osm' || choice === 'google') return choice
+  return places.isConfigured() ? 'google' : 'osm'
+}
+
 const app = express()
 
 app.use(cors())
@@ -26,6 +33,7 @@ app.get('/health', (_req, res) => {
     openaiConfigured: openai.isConfigured(),
     supabaseConfigured: supabase.isConfigured(),
     placesConfigured: places.isConfigured(),
+    businessProvider: businessProvider(),
   })
 })
 
@@ -44,5 +52,6 @@ app.listen(PORT, () => {
   console.log(`\n  🍁 REAA backend running on http://localhost:${PORT}`)
   console.log(`     OpenAI   ${openai.isConfigured() ? '✅ configured' : '⚠️  no OPENAI_API_KEY in backend/.env'}`)
   console.log(`     Supabase ${supabase.isConfigured() ? '✅ configured' : '⚠️  not configured (songs saved to browser only)'}`)
-  console.log(`     Places   ${places.isConfigured() ? '✅ configured' : '⚠️  no GOOGLE_PLACES_KEY (Find Businesses disabled)'}\n`)
+  console.log(`     Places   ${places.isConfigured() ? '✅ Google key present' : '—  no Google key'}`)
+  console.log(`     Find Biz using: ${businessProvider() === 'osm' ? '🟢 OpenStreetMap (free, no card)' : '🔵 Google Places'}\n`)
 })

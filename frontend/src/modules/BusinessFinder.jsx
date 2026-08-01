@@ -89,8 +89,8 @@ export default function BusinessFinder() {
           <h2 style={{ fontSize: 24, color: 'var(--gold)', marginBottom: 6 }}>🔎 Find Businesses</h2>
           <p style={{ fontSize: 13, color: 'var(--w5)', lineHeight: 1.65 }}>
             Search real businesses by type and location — get name, phone, address and website. Add them
-            straight to Leads or export a CSV. Data comes from Google&apos;s live business index, so every
-            contact is real and callable (no AI guesses).
+            straight to Leads or export a CSV. Data comes from a live map directory, so every contact is
+            real and callable (no AI guesses).
           </p>
         </div>
       </div>

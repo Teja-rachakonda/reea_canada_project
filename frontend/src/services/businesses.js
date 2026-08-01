@@ -12,7 +12,7 @@ export async function searchBusinesses({ type, location, cuisine, wantEmail }) {
     const { data } = await axios.post(
       `${API_URL}/api/businesses/search`,
       { type, location, cuisine, wantEmail },
-      { timeout: wantEmail ? 60000 : 25000 }
+      { timeout: wantEmail ? 90000 : 60000 }
     )
     return data
   } catch (err) {
