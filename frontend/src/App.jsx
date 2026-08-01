@@ -13,6 +13,7 @@ import Dashboard from './modules/Dashboard'
 import AdminPanel from './modules/AdminPanel'
 import REAAMusic from './modules/REAAMusic'
 import BusinessFinder from './modules/BusinessFinder'
+import HouzGPT from './modules/HouzGPT'
 
 // Built modules. Everything else falls through to Placeholder.
 const MODULE_COMPONENTS = {
@@ -20,6 +21,7 @@ const MODULE_COMPONENTS = {
   admin: AdminPanel,
   reaamusic: REAAMusic,
   scraper: BusinessFinder,
+  houzgpt: HouzGPT,
 }
 
 /**

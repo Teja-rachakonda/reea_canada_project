@@ -24,6 +24,7 @@ app.use(express.json())
 app.use('/api/reaamusic', require('./routes/reaamusic'))
 app.use('/api/leads', require('./routes/leads'))
 app.use('/api/businesses', require('./routes/businesses'))
+app.use('/api/houzgpt', require('./routes/houzgpt'))
 
 app.get('/health', (_req, res) => {
   res.json({

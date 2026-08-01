@@ -6,7 +6,7 @@ export const MODULES = [
   { id: 'precon', label: 'Pre-Construction', icon: '🏗️', category: 'Data', version: '0.1.0', permissions: ['precon'] },
   { id: 'trreb', label: 'TRREB Intel', icon: '📊', category: 'Data', version: '0.1.0', permissions: ['trreb'] },
   { id: 'cma', label: 'Smart CMA', icon: '📋', category: 'Tools', version: '0.1.0', permissions: ['cma'] },
-  { id: 'houzgpt', label: 'HouzGPT Canada', icon: '🏘️', category: 'Tools', version: '0.1.0', permissions: ['houzgpt'] },
+  { id: 'houzgpt', label: 'HouzGPT Canada', icon: '🏘️', category: 'Tools', version: '1.0.0', permissions: ['houzgpt'], badge: 'NEW', badgeType: 'green' },
   { id: 'buyer', label: 'Buyer Agent AI', icon: '🏷️', category: 'Tools', version: '0.1.0', permissions: ['buyer'] },
   { id: 'listing', label: 'Listing Agent AI', icon: '🏡', category: 'Tools', version: '0.1.0', permissions: ['listing'] },
   { id: 'social', label: 'Social Engine', icon: '📱', category: 'Content', version: '0.1.0', permissions: ['social'] },
