@@ -8,6 +8,7 @@ require('dotenv').config({ override: true })
 const openai = require('./services/openaiService')
 const supabase = require('./services/supabaseService')
 const places = require('./services/placesService')
+const heygen = require('./services/heygenService')
 
 // Which source Find Businesses uses. OSM = free/no-key; Google = needs billing key.
 function businessProvider() {
@@ -28,6 +29,7 @@ app.use('/api/houzgpt', require('./routes/houzgpt'))
 app.use('/api/deals', require('./routes/deals'))
 app.use('/api/agents', require('./routes/agents'))
 app.use('/api/social', require('./routes/social'))
+app.use('/api/video', require('./routes/video'))
 
 app.get('/health', (_req, res) => {
   res.json({
@@ -38,6 +40,7 @@ app.get('/health', (_req, res) => {
     supabaseConfigured: supabase.isConfigured(),
     placesConfigured: places.isConfigured(),
     businessProvider: businessProvider(),
+    heygenConfigured: heygen.isConfigured(),
   })
 })
 

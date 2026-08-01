@@ -18,6 +18,7 @@ import DealsAlert from './modules/DealsAlert'
 import ListingAgent from './modules/ListingAgent'
 import BuyerAgent from './modules/BuyerAgent'
 import SocialPost from './modules/SocialPost'
+import VideoStudio from './modules/VideoStudio'
 
 // Built modules. Everything else falls through to Placeholder.
 const MODULE_COMPONENTS = {
@@ -30,6 +31,7 @@ const MODULE_COMPONENTS = {
   listing: ListingAgent,
   buyer: BuyerAgent,
   social: SocialPost,
+  video: VideoStudio,
 }
 
 /**

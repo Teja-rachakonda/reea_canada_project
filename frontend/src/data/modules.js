@@ -12,7 +12,7 @@ export const MODULES = [
   { id: 'deals', label: 'Deals Alert', icon: '🔥', category: 'Content', version: '1.0.0', permissions: ['social'], badge: 'NEW', badgeType: 'green' },
   { id: 'social', label: 'Social Post Studio', icon: '📱', category: 'Content', version: '1.0.0', permissions: ['social'], badge: 'NEW', badgeType: 'green' },
   { id: 'calendar', label: 'Content Calendar', icon: '📅', category: 'Content', version: '0.1.0', permissions: ['social'] },
-  { id: 'video', label: 'Video Studio', icon: '🎬', category: 'Content', version: '0.1.0', permissions: ['social'] },
+  { id: 'video', label: 'Video Studio', icon: '🎬', category: 'Content', version: '1.0.0', permissions: ['social'], badge: 'NEW', badgeType: 'green' },
   { id: 'posters', label: 'AI Posters', icon: '🖼️', category: 'Content', version: '0.1.0', permissions: ['social'] },
   { id: 'reaamusic', label: 'REAAMusic', icon: '🎵', category: 'Content', version: '1.0.0', permissions: ['social'], badge: 'NEW', badgeType: 'green' },
   { id: 'voicebot', label: 'Vapi Voice Bot', icon: '🎙️', category: 'AI', version: '0.1.0', permissions: ['voicebot'] },
