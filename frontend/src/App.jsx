@@ -15,6 +15,8 @@ import REAAMusic from './modules/REAAMusic'
 import BusinessFinder from './modules/BusinessFinder'
 import HouzGPT from './modules/HouzGPT'
 import DealsAlert from './modules/DealsAlert'
+import ListingAgent from './modules/ListingAgent'
+import BuyerAgent from './modules/BuyerAgent'
 
 // Built modules. Everything else falls through to Placeholder.
 const MODULE_COMPONENTS = {
@@ -24,6 +26,8 @@ const MODULE_COMPONENTS = {
   scraper: BusinessFinder,
   houzgpt: HouzGPT,
   deals: DealsAlert,
+  listing: ListingAgent,
+  buyer: BuyerAgent,
 }
 
 /**

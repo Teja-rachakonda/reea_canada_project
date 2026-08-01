@@ -26,6 +26,7 @@ app.use('/api/leads', require('./routes/leads'))
 app.use('/api/businesses', require('./routes/businesses'))
 app.use('/api/houzgpt', require('./routes/houzgpt'))
 app.use('/api/deals', require('./routes/deals'))
+app.use('/api/agents', require('./routes/agents'))
 
 app.get('/health', (_req, res) => {
   res.json({
