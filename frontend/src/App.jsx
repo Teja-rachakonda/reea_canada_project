@@ -17,6 +17,7 @@ import HouzGPT from './modules/HouzGPT'
 import DealsAlert from './modules/DealsAlert'
 import ListingAgent from './modules/ListingAgent'
 import BuyerAgent from './modules/BuyerAgent'
+import SocialPost from './modules/SocialPost'
 
 // Built modules. Everything else falls through to Placeholder.
 const MODULE_COMPONENTS = {
@@ -28,6 +29,7 @@ const MODULE_COMPONENTS = {
   deals: DealsAlert,
   listing: ListingAgent,
   buyer: BuyerAgent,
+  social: SocialPost,
 }
 
 /**

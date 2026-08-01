@@ -10,7 +10,7 @@ export const MODULES = [
   { id: 'buyer', label: 'Buyer Agent AI', icon: '🏷️', category: 'Tools', version: '1.0.0', permissions: ['buyer'], badge: 'NEW', badgeType: 'green' },
   { id: 'listing', label: 'Listing Agent AI', icon: '🏡', category: 'Tools', version: '1.0.0', permissions: ['listing'], badge: 'NEW', badgeType: 'green' },
   { id: 'deals', label: 'Deals Alert', icon: '🔥', category: 'Content', version: '1.0.0', permissions: ['social'], badge: 'NEW', badgeType: 'green' },
-  { id: 'social', label: 'Social Engine', icon: '📱', category: 'Content', version: '0.1.0', permissions: ['social'] },
+  { id: 'social', label: 'Social Post Studio', icon: '📱', category: 'Content', version: '1.0.0', permissions: ['social'], badge: 'NEW', badgeType: 'green' },
   { id: 'calendar', label: 'Content Calendar', icon: '📅', category: 'Content', version: '0.1.0', permissions: ['social'] },
   { id: 'video', label: 'Video Studio', icon: '🎬', category: 'Content', version: '0.1.0', permissions: ['social'] },
   { id: 'posters', label: 'AI Posters', icon: '🖼️', category: 'Content', version: '0.1.0', permissions: ['social'] },
