@@ -12,7 +12,16 @@ services:
     startCommand: node index.js
     healthCheckPath: /health
     envVars:
+      # Required — paste your funded OpenAI key.
       - key: OPENAI_API_KEY
+        sync: false
+      # Find Businesses uses free OpenStreetMap by default (no card needed).
+      - key: BUSINESS_PROVIDER
+        value: osm
+      # Optional Phase-2 keys — leave blank now, fill in when you add those features.
+      - key: HEYGEN_API_KEY
+        sync: false
+      - key: HEYGEN_TEMPLATE_ID
         sync: false
       - key: NODE_VERSION
         value: "22.19.0"
