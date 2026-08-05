@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_URL } from './openai'
+import { API_URL, pingHealth, backendUnreachableMsg } from './openai'
 
 /** Write a spoken video script from listing details (OpenAI, on the backend). */
 export async function writeVideoScript(details) {
@@ -35,19 +35,15 @@ export async function getVideoStatus(videoId) {
 
 /** Is HeyGen configured on the backend? */
 export async function checkHeyGen() {
-  try {
-    const { data } = await axios.get(`${API_URL}/health`, { timeout: 4000 })
-    return { online: true, heygenConfigured: !!data?.heygenConfigured, openaiConfigured: !!data?.openaiConfigured }
-  } catch {
-    return { online: false, heygenConfigured: false, openaiConfigured: false }
-  }
+  const data = await pingHealth()
+  return data
+    ? { online: true, heygenConfigured: !!data.heygenConfigured, openaiConfigured: !!data.openaiConfigured }
+    : { online: false, heygenConfigured: false, openaiConfigured: false }
 }
 
 function readError(err) {
   if (err.response?.data?.error) return err.response.data.error
   if (err.code === 'ECONNABORTED') return 'The request took too long. Try again.'
-  if (err.code === 'ERR_NETWORK') {
-    return `Cannot reach the backend at ${API_URL}. Start it with: cd backend && npm run dev`
-  }
+  if (err.code === 'ERR_NETWORK') return backendUnreachableMsg()
   return err.message || 'Unknown error.'
 }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_URL } from './openai'
+import { API_URL, pingHealth, backendUnreachableMsg } from './openai'
 
 /**
  * Find real businesses by type + location.
@@ -20,21 +20,17 @@ export async function searchBusinesses({ type, location, cuisine, wantEmail }) {
   }
 }
 
-/** Is Places wired up on the backend? */
+/** Is the backend up? (Find Businesses uses free OSM, so no key needed.) */
 export async function checkPlaces() {
-  try {
-    const { data } = await axios.get(`${API_URL}/health`, { timeout: 4000 })
-    return { online: true, placesConfigured: !!data?.placesConfigured }
-  } catch {
-    return { online: false, placesConfigured: false }
-  }
+  const data = await pingHealth()
+  return data
+    ? { online: true, placesConfigured: !!data.placesConfigured }
+    : { online: false, placesConfigured: false }
 }
 
 function readError(err) {
   if (err.response?.data?.error) return err.response.data.error
   if (err.code === 'ECONNABORTED') return 'Search timed out. Try without email lookup, or narrow the search.'
-  if (err.code === 'ERR_NETWORK') {
-    return `Cannot reach the backend at ${API_URL}. Start it with: cd backend && npm run dev`
-  }
+  if (err.code === 'ERR_NETWORK') return backendUnreachableMsg()
   return err.message || 'Unknown error searching businesses.'
 }

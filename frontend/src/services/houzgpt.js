@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_URL } from './openai'
+import { API_URL, backendUnreachableMsg } from './openai'
 
 /**
  * Ask HouzGPT a question. Sends the running conversation so the assistant has
@@ -19,8 +19,6 @@ export async function askHouzGPT(messages) {
 function readError(err) {
   if (err.response?.data?.error) return err.response.data.error
   if (err.code === 'ECONNABORTED') return 'HouzGPT took too long to respond. Try again.'
-  if (err.code === 'ERR_NETWORK') {
-    return `Cannot reach the backend at ${API_URL}. Start it with: cd backend && npm run dev`
-  }
+  if (err.code === 'ERR_NETWORK') return backendUnreachableMsg()
   return err.message || 'Unknown error contacting HouzGPT.'
 }

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_URL } from './openai'
+import { API_URL, backendUnreachableMsg } from './openai'
 
 /**
  * Generate a property deal alert (WhatsApp + Facebook posts).
@@ -18,8 +18,6 @@ export async function generateDeal(form) {
 function readError(err) {
   if (err.response?.data?.error) return err.response.data.error
   if (err.code === 'ECONNABORTED') return 'Generating took too long. Try again.'
-  if (err.code === 'ERR_NETWORK') {
-    return `Cannot reach the backend at ${API_URL}. Start it with: cd backend && npm run dev`
-  }
+  if (err.code === 'ERR_NETWORK') return backendUnreachableMsg()
   return err.message || 'Unknown error generating the deal alert.'
 }

@@ -97,7 +97,7 @@ export default function BusinessFinder() {
 
       {/* Backend / key warnings */}
       {!places.online && (
-        <Banner tone="red">⚠️ Backend offline — start it with <code>cd backend &amp;&amp; npm run dev</code>. On the free host it may take ~50s to wake; refresh shortly.</Banner>
+        <Banner tone="red">⏳ Connecting to the server… free hosting can take ~30–60s to wake up. If it persists, reload the page.</Banner>
       )}
       {keyMissing && (
         <Banner tone="gold">

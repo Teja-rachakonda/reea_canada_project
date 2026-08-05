@@ -23,22 +23,45 @@ export async function generateSong(formData) {
   }
 }
 
+/**
+ * Ping /health, retrying to survive a free-tier cold start (Render sleeps after
+ * ~15 min idle and takes ~50s to wake). Returns the health payload, or null if
+ * it never came up. Shared by all modules' status checks.
+ */
+export async function pingHealth(attempts = 12, gapMs = 5000) {
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const { data } = await axios.get(`${API_URL}/health`, { timeout: 8000 })
+      return data
+    } catch {
+      if (i < attempts - 1) await new Promise((r) => setTimeout(r, gapMs))
+    }
+  }
+  return null
+}
+
 /** Is the backend up? Used to show a useful message instead of a raw axios error. */
 export async function checkBackend() {
-  try {
-    const { data } = await axios.get(`${API_URL}/health`, { timeout: 4000 })
-    return { online: true, openaiConfigured: !!data?.openaiConfigured }
-  } catch {
-    return { online: false, openaiConfigured: false }
-  }
+  const data = await pingHealth()
+  return data
+    ? { online: true, openaiConfigured: !!data.openaiConfigured }
+    : { online: false, openaiConfigured: false }
+}
+
+/** True when running against a deployed backend (not localhost). */
+export const IS_REMOTE = !/localhost|127\.0\.0\.1/.test(API_URL)
+
+/** Environment-aware message for when the backend can't be reached. */
+export function backendUnreachableMsg() {
+  return IS_REMOTE
+    ? 'The server may be waking up — free hosting sleeps when idle and takes ~30–60s to start. Please wait a moment and try again.'
+    : `Cannot reach the backend at ${API_URL}. Start it with: cd backend && npm run dev`
 }
 
 function readError(err) {
   if (err.response?.data?.error) return err.response.data.error
   if (err.code === 'ECONNABORTED') return 'Request timed out. OpenAI took too long to respond.'
-  if (err.code === 'ERR_NETWORK') {
-    return `Cannot reach the backend at ${API_URL}. Start it with: cd backend && npm run dev`
-  }
+  if (err.code === 'ERR_NETWORK') return backendUnreachableMsg()
   return err.message || 'Unknown error generating song.'
 }
 

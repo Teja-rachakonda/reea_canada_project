@@ -41,7 +41,7 @@ export default function BuyerAgent() {
         </p>
       </div></div>
 
-      {!backend.online && <Banner tone="red">⚠️ Backend offline — start it with <code>cd backend &amp;&amp; npm run dev</code>.</Banner>}
+      {!backend.online && <Banner tone="red">⏳ Connecting to the server… free hosting can take ~30–60s to wake up. If it persists, reload the page.</Banner>}
       {keyMissing && <Banner tone="gold">🔑 OpenAI key not set — add <code>OPENAI_API_KEY</code> to <code>backend/.env</code>.</Banner>}
 
       <form className="card" onSubmit={submit} style={{ marginBottom: 16 }}>

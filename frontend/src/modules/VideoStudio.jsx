@@ -78,7 +78,7 @@ export default function VideoStudio() {
         </p>
       </div></div>
 
-      {!status.online && <Banner tone="red">⚠️ Backend offline — start it with <code>cd backend &amp;&amp; npm run dev</code>.</Banner>}
+      {!status.online && <Banner tone="red">⏳ Connecting to the server… free hosting can take ~30–60s to wake up. If it persists, reload the page.</Banner>}
       {heygenMissing && <Banner tone="gold">🔑 HeyGen key not set — add <code>HEYGEN_API_KEY</code> to <code>backend/.env</code>.</Banner>}
       <Banner tone="gold">💳 Each video uses your HeyGen account credits. Generate when the script is final.</Banner>
 

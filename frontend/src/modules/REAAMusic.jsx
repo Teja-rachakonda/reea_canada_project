@@ -97,11 +97,11 @@ export default function REAAMusic({ onNavigate }) {
 
       {backendDown && (
         <Warning
-          title="Backend is not running"
+          title="Connecting to the server…"
           body={
             <>
-              REAAMusic needs the backend for its OpenAI call. Start it with{' '}
-              <code style={code}>cd backend && npm run dev</code>, then reload this page.
+              The server may be waking up — free hosting sleeps when idle and takes ~30–60s to start.
+              Please wait a moment and reload this page.
             </>
           }
         />
